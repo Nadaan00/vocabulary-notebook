@@ -61,8 +61,7 @@
         }
 
         function save_word() {
-            let defs = {{ definitions | tojson
-        }};
+            let defs = {{ definitions | tojson }}; // mengubah file array menjadi json
 
         for (let i = 0; i < defs.length; i++) {
             let def = defs[i];
@@ -149,6 +148,11 @@
         function add_ex() {
             let new_ex = $('#new-example').val();
             console.log(new_ex)
+            if(!new_ex.includes(word)) {
+                alert('Please insert with ' + word + ' into the sentences!');
+                return;
+            }
+            
             $.ajax({
                 type: "POST",
                 url: `/api/save_ex`,
